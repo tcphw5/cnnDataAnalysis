@@ -14,15 +14,25 @@ tokenizedOutput = "tokenizedOutput1_1.txt"
 #data = np.loadtxt(tokenizedOutput, dtype=np.dtype(str))
 data = np.genfromtxt(tokenizedOutput, dtype=str)
 
+datalist = data.tolist()
+
+for x in range(len(data)):
+    if data[x][-1] == "," or data[x][-1] == "." or data[x][-1] == ")":
+        data[x] = data[x][:-1]
+
+datafixed = np.array(data)
+
+
+"""
 for word in np.nditer(data, op_flags=['readwrite']):
     if word == "," or word == "." or word == ")":
         #print("hi")
         word[...] = word[0:-1]
         print(word)
+"""
 
 
-
-unique, counts = np.unique(data, return_counts=True)
+unique, counts = np.unique(datafixed, return_counts=True)
 
 wordcounts = np.asarray((unique, counts)).T
 
