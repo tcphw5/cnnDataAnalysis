@@ -9,37 +9,36 @@ Created on Wed Feb  8 11:23:03 2017
 
 import numpy as np
 
-tokenizedOutput = "tokenizedOutput1_1.txt"
 
-#data = np.loadtxt(tokenizedOutput, dtype=np.dtype(str))
-data = np.genfromtxt(tokenizedOutput, dtype=str)
+fileOUT = open('Output.txt', 'w', encoding='utf-8')
+counterINT = 0
+numofArticles = 105; #constant. needs to be changed if number changes
 
-datalist = data.tolist()
+totalwordcounts = np.array([])
+combineddata = []
 
-for x in range(len(data)):
-    if data[x][-1] == "," or data[x][-1] == "." or data[x][-1] == ")":
-        data[x] = data[x][:-1]
+for x in range(105):
+    fileIN = "tokenizedOutput" + str(x+1) + ".txt"
+    data = np.genfromtxt(fileIN, dtype='U20', converters={0:lambda x: x.decode()})
+    
+    datalist = data.tolist()
+        
+    
+    for x in range(len(datalist)):
+        if datalist[x][-1] == "," or datalist[x][-1] == "." or datalist[x][-1] == ")":
+            datalist[x] = datalist[x][:-1]
+    
+    combineddata = datalist + combineddata
+    
+np.asarray(combineddata)
 
-datafixed = np.array(data)
-
-
-"""
-for word in np.nditer(data, op_flags=['readwrite']):
-    if word == "," or word == "." or word == ")":
-        #print("hi")
-        word[...] = word[0:-1]
-        print(word)
-"""
-
-
-unique, counts = np.unique(datafixed, return_counts=True)
-
+unique, counts = np.unique(combineddata, return_counts=True)
+    
 wordcounts = np.asarray((unique, counts)).T
 
 sortedwordcounts = wordcounts[np.argsort(wordcounts[:, 1])[::-1]]
 
-fileOUT = open('Output.txt', 'w', encoding='utf-8')
-
-
+sortedwordcounts = wordcounts[np.argsort(wordcounts[:, 1].astype(int))[::-1]]
+ 
 for word in sortedwordcounts:
     fileOUT.write(word[0] + " " + word[1] + "\n")

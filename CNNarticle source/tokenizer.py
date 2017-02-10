@@ -22,7 +22,7 @@ for x in range(13):
     for tok in tokenizedArticles:
         if tok[0:5] == 'http:':
             counterINT += 1
-            fileOUT = open('tokenizedOutput' + str(x+1) + "_" + str(counterINT) + '.txt', 'w', encoding='utf-8')
+            fileOUT = open('tokenizedOutput' + str(counterINT) + '.txt', 'w', encoding='utf-8')
         
         fileOUT.write(tok + "\n")
         
