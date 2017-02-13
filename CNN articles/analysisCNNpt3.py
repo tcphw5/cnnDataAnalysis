@@ -16,6 +16,7 @@ featwords = np.genfromtxt(fileIN, dtype='U300', converters={0:lambda x: x.decode
 featwords = featwords.tolist()
 
 print(featwords)
+artcounter = 1;
 
 fileOUT = open('Output2.txt', 'w', encoding='utf-8')
 counterINT = 0
@@ -31,6 +32,8 @@ for x in range(105):
     data = np.genfromtxt(fileIN2, dtype='U300', converters={0:lambda x: x.decode()})
         
     datalist = data.tolist()
+    
+    
         
     
     for x in range(len(datalist)):
@@ -43,28 +46,30 @@ for x in range(105):
     
     wordcounts = np.asarray((unique, counts)).T
                            
+    print(wordcounts)
+                           
     newrow = []
     #newrow.append(datalist[0])
     
     for word in featwords:
         
         print(word)
-        y = counts[np.where(unique == word[0])]
         
-        if len(y) != 0:
-            newrow.append(y[0])
-            #print(y)
-            #print(newrow)
+        try:
+            y = counts[np.where(unique == word)[0][0]]
+        except IndexError:
+            y = 0
         
-        if len(y) == 0:
-            y = np.append(y, [0])
-            newrow.append(y[0])
-            #print(newrow)
-            #print(y)
+        print(y)
+    
+        newrow.append(y)
+        
              
         #print(y)
     
     #print(newrow)
+    newrow[0] = artcounter
+    artcounter += 1
     combineddata.append(newrow)
     
     
