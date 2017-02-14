@@ -14,6 +14,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.metrics import jaccard_similarity_score
 from operator import itemgetter
 
+
 fileIN = 'featuresnocount.txt'
 featwords = np.genfromtxt(fileIN, dtype='U300', converters={0:lambda x: x.decode()})
 
@@ -31,6 +32,12 @@ numofArticles = 105; #constant. needs to be changed if number changes
 
 
 combineddata = []
+
+#JAC 42-99
+#EU 36-42
+#cos 68-7
+
+tablefile = open('tablefile.txt', 'w', encoding='utf-8')
 
 for x in range(numofArticles):
     fileIN2 = "tokenizedOutput" + str(x+1) + ".txt"
@@ -57,9 +64,7 @@ for x in range(numofArticles):
     #newrow.append(datalist[0])
     
     for word in featwords:
-        
-        #print(word)
-        
+                
         try:
             y = counts[np.where(unique == word)[0][0]]
         except IndexError:
@@ -74,6 +79,50 @@ for x in range(numofArticles):
     
     #print(newrow)
     newrow[0] = artcounter
+          
+    
+
+     #EU 36-42
+     #cos 68-7
+    if artcounter == 36:
+        tablefile.write("36" + "\n")
+        sortedwordcounts = wordcounts[np.argsort(wordcounts[:, 1].astype(int))[::-1]]
+        print(sortedwordcounts)
+        
+        for word in sortedwordcounts:
+            tablefile.write(word[0] + " " + word[1] + "\n")
+            
+    if artcounter == 68:
+        tablefile.write("68" + "\n")
+        sortedwordcounts = wordcounts[np.argsort(wordcounts[:, 1].astype(int))[::-1]]
+        print(sortedwordcounts)
+        
+        for word in sortedwordcounts:
+            tablefile.write(word[0] + " " + word[1] + "\n")    
+            
+    if artcounter == 7:
+        tablefile.write("7" + "\n")
+        sortedwordcounts = wordcounts[np.argsort(wordcounts[:, 1].astype(int))[::-1]]
+        print(sortedwordcounts)
+        
+        for word in sortedwordcounts:
+            tablefile.write(word[0] + " " + word[1] + "\n")           
+          
+    if artcounter == 42:
+        tablefile.write("42" + "\n")
+        sortedwordcounts = wordcounts[np.argsort(wordcounts[:, 1].astype(int))[::-1]]
+        print(sortedwordcounts)
+        
+        for word in sortedwordcounts:
+            tablefile.write(word[0] + " " + word[1] + "\n")
+        
+    if artcounter == 99:
+        tablefile.write("99" + "\n")
+        sortedwordcounts = wordcounts[np.argsort(wordcounts[:, 1].astype(int))[::-1]]
+        
+        for word in sortedwordcounts:
+            tablefile.write(word[0] + " " + word[1] + "\n")
+    
     artcounter += 1
     combineddata.append(newrow)
     
@@ -84,10 +133,6 @@ articletable = np.array(combineddata, dtype=int)
 i = articletable[1][1:]
 j = articletable[2][1:]
 
-dist = 1 - spatial.distance.cosine(i, j)
-dist2 = 1 - spatial.distance.jaccard(i, j)
-print(dist)
-print(dist2)
 
 eudistmatrix = []
 neweudistrow = []
