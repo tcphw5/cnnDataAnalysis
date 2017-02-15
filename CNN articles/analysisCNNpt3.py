@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-analysis of CNN articles pt2
+analysis of CNN articles pt3
+
+creates data matrix using feature word counts for each article.
+performs euclidean, cosine, and jaccard similarity comparisons for all pairs
+and outputs results for each in 4 different files (two different jaccard 
+methods)
 
 Created on Fri Feb 10 16:16:24 2017
 
@@ -79,6 +84,7 @@ for x in range(numofArticles):
     
     
 #print(combineddata)
+#save
 articletable = np.array(combineddata, dtype=int)
 
 i = articletable[1][1:]
@@ -155,10 +161,13 @@ for i in range(0, numofArticles):
     newcosdistrow = []
     newjacdistrow = []
     newjacdistrow2 = []
-
+#save
 eudistmatrix = np.array(eudistmatrix)
+#save
 cosdistmatrix = np.array(cosdistmatrix)
+#save
 jacdistmatrix = np.array(jacdistmatrix)
+#save
 jacdistmatrix2 = np.array(jacdistmatrix2)
 
 #matrix not actually used but may be helpful for the future?

@@ -3,6 +3,8 @@
 """
 analysis of CNN articles pt2
 
+replaced by pt3
+
 Created on Fri Feb 10 16:16:24 2017
 
 @author: tp-mate

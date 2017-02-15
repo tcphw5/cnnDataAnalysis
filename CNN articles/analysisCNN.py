@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-analysis of CNN articles
+analysis of CNN articles pt1
+
+gets the unified vocabulary for all articles in one file with word counts
 
 Created on Wed Feb  8 11:23:03 2017
 
