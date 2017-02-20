@@ -18,3 +18,4 @@ featwords = np.genfromtxt(fileIN, dtype='U300', converters={0:lambda x: x.decode
 
 
 articledf = pd.DataFrame(data=datamat[:,1:], index=datamat[:,0], columns=featwords[1:])
+

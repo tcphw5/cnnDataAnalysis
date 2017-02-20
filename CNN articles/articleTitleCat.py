@@ -15,8 +15,10 @@ artcounter = 1;
 
 #fileOUT = open('Output2.txt', 'w', encoding='utf-8')
 
+fileOUT = open('titlelist.txt', 'w', encoding='utf-8')
 
-counterINT = 0
+
+counterINT = 1
 numofArticles = 105; #constant. needs to be changed if number changes
 #articles 70 and 75 are not found
 
@@ -44,4 +46,11 @@ for x in range(numofArticles):
     artcounter += 1
     combineddata.append(newrow)
     
+for word in combineddata:
+    fileOUT.write(str(counterINT))
+    
+    for part in word:
+        fileOUT.write(part + " ")
+    fileOUT.write("\n")
+    counterINT+=1
     
