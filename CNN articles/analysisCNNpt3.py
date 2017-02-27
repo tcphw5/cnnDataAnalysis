@@ -89,6 +89,8 @@ for x in range(numofArticles):
 
      #EU 36-42
      #cos 68-7
+     #for an example comparing word counts between specific articles
+    """
     if artcounter == 36:
         tablefile.write("36" + "\n")
         sortedwordcounts = wordcounts[np.argsort(wordcounts[:, 1].astype(int))[::-1]]
@@ -127,6 +129,7 @@ for x in range(numofArticles):
         
         for word in sortedwordcounts:
             tablefile.write(word[0] + " " + word[1] + "\n")
+    """
     
     artcounter += 1
     combineddata.append(newrow)

@@ -1,0 +1,39 @@
+First, I ran the KNN and Decision Tree classifiers with the 100 feature words I
+used to create the data matrix from the first homework. These feature words were
+too few and not distinct enough to get extremely accurate results though. So I
+thought it would be good to see how much increasing the number of feature words
+increased the accuracy of the two classifiers. I used a self implemented 5 fold
+cross validation to make sure the results would be more consistent for each run.
+To further improve the consistency of my results, I averaged the accuracy for 20 runs
+of both the decision tree and KNN for the best value of k.
+
+The decision tree yielded an accuracy of .529518.
+The dec tree gives f1-score .419026
+
+For the KNN, although there were 6 different categories, almost half were political
+articles and the majority of the 100 features words were related to politics. Due to
+KNN using Euclidean distance, which is not well suited for sparse nature of
+a document term frequency matrix, the results were not great. The highest accuracy
+was received from using a k=2. This is likely because of all the political articles
+were able to be identified since they all were closer to each other due to using
+a lot of the similar political feature words. Essentially the KNN recognized
+political and non political, and just took guesses of which non political category to assign.
+Increasing k towards 6 results in slightly worse results and when k goes above 7 the accuracy
+drops quickly.
+
+With k=2 (the most accurate) the KNN yielded an accuracy of .527619
+KNN gives f1-score of .3423515
+
+I think increasing the number of feature words will increase the accuracy of the
+decision tree and shift the best value of k closer towards 6 because it will be able
+to more accurately detect the differences between groups. However, I don't think
+the accuracy for the KNN will increase as much as the decision tree because it
+is still using Euclidean distance which isn't as well suited for document matrix data.
+
+Since the data is unbalanced in class size (mostly political articles) f1-score
+is more suited to truly revealing which classifier actually works better.
+KNN with k=2 had almost the same accuracy as the decision tree, however, its
+f1-score was much lower than the decision tree. This is because the knn just puts
+half of the articles into the political category mindlessly and gets a high accuracy because
+most of the articles are political. The f1-score detects these false positives and
+false negatives and adjusts the score accordingly. 
