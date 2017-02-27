@@ -13,10 +13,9 @@ import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import f1_score
-
+from sklearn import tree
+import pydotplus
 import random
-
-
 
 datamat = np.load('datamatrix.npy')
 
@@ -26,7 +25,8 @@ datamat = np.load('datamatrix.npy')
 #once added to articledf
 categories = pd.read_csv('categoriesIndex.txt')
 
-fileIN = 'featuresnocount.txt'
+fileIN = 'Output2.txt'
+#fileIN = 'featuresnocount.txt'
 featwords = np.genfromtxt(fileIN, dtype='U300', converters={0:lambda x: x.decode()})
 
 articledf = pd.DataFrame(data=datamat[:,1:], index=datamat[:,0], columns=featwords[1:])
@@ -52,20 +52,22 @@ articledf["category index"] = categories
 
 #alg = RandomForestClassifier(random_state=1, n_estimators=1, min_samples_split=4, min_samples_leaf=2)
 
+kval = 6
+
 alg1 = DecisionTreeClassifier(random_state=0)
-alg12 = KNeighborsClassifier(n_neighbors=2)
+alg12 = KNeighborsClassifier(n_neighbors=kval)
 
 alg2 = DecisionTreeClassifier(random_state=0)
-alg22 = KNeighborsClassifier(n_neighbors=2)
+alg22 = KNeighborsClassifier(n_neighbors=kval)
 
 alg3 = DecisionTreeClassifier(random_state=0)
-alg32 = KNeighborsClassifier(n_neighbors=2)
+alg32 = KNeighborsClassifier(n_neighbors=kval)
 
 alg4 = DecisionTreeClassifier(random_state=0)
-alg42 = KNeighborsClassifier(n_neighbors=2)
+alg42 = KNeighborsClassifier(n_neighbors=kval)
 
 alg5 = DecisionTreeClassifier(random_state=0)
-alg52 = KNeighborsClassifier(n_neighbors=2)
+alg52 = KNeighborsClassifier(n_neighbors=kval)
 
 Datasplits = [x for x in range(106) if x != 0]
 
@@ -160,7 +162,7 @@ for i in part5:
     testingdfold5 = testingdfold5.append(articledf[i-1:i])
 
 
-
+#kfold commented out and own (ineffecient) version implemented
 #kf = cross_validation.KFold(articledf.shape[0], n_folds=5, random_state=1)
 
 #scores = cross_validation.cross_val_score(alg, articledf[predictors], articledf["category index"],cv=kf)
@@ -168,6 +170,11 @@ for i in part5:
 #alg.fit(articledf[predictors], articledf["category index"])
 
 alg1.fit(trainingdfold1[predictors], trainingdfold1["category index"])
+    
+#dont need to do every time
+#dot_data = tree.export_graphviz(alg1, out_file=None)
+#graph = pydotplus.graph_from_dot_data(dot_data)
+#graph.write_pdf("tree.pdf")
 
 prediction1 = alg1.predict(testingdfold1[predictors])
 

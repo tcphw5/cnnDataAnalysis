@@ -20,7 +20,8 @@ from sklearn.metrics import jaccard_similarity_score
 from operator import itemgetter
 
 
-fileIN = 'featuresnocount.txt'
+#fileIN = 'featuresnocount.txt'
+fileIN = 'Output2.txt'
 featwords = np.genfromtxt(fileIN, dtype='U300', converters={0:lambda x: x.decode()})
 
 featwords = featwords.tolist()
@@ -138,6 +139,7 @@ for x in range(numofArticles):
 #print(combineddata)
 #save
 articletable = np.array(combineddata, dtype=int)
+np.save('datamatrix.npy', articletable)
 
 i = articletable[1][1:]
 j = articletable[2][1:]
