@@ -13,8 +13,6 @@ import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import f1_score
-from sklearn import tree
-import pydotplus
 import random
 
 datamat = np.load('datamatrix.npy')
