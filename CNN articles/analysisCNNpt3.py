@@ -213,10 +213,16 @@ for i in range(0, numofArticles):
     newjacdistrow2 = []
 #save
 eudistmatrix = np.array(eudistmatrix)
+#np.save('datamatrix.npy', articletable)
+
 #save
 cosdistmatrix = np.array(cosdistmatrix)
+np.save('COSmatrix.npy', cosdistmatrix)
+
 #save
 jacdistmatrix = np.array(jacdistmatrix)
+np.save('JACmatrix.npy', jacdistmatrix)
+
 #save
 jacdistmatrix2 = np.array(jacdistmatrix2)
 

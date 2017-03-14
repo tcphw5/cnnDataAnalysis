@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+    # -*- coding: utf-8 -*-
 """
 analysis of CNN articles pt1
 
@@ -13,7 +13,6 @@ import numpy as np
 
 
 fileOUT = open('Output.txt', 'w', encoding='utf-8')
-fileOUT2 = open('Output2.txt', 'w', encoding='utf-8')
 counterINT = 0
 numofArticles = 105; #constant. needs to be changed if number changes
 
@@ -45,4 +44,3 @@ sortedwordcounts = wordcounts[np.argsort(wordcounts[:, 1].astype(int))[::-1]]
  
 for word in sortedwordcounts:
     fileOUT.write(word[0] + " " + word[1] + "\n")
-    fileOUT2.write(word[0] + "\n")

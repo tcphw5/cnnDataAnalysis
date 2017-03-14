@@ -17,6 +17,7 @@ import random
 
 datamat = np.load('datamatrix.npy')
 
+
 #categoriesIndex.txt has an extra 1 after index name
 #not sure why it is needed but value is not actually
 #used. just needed to push down values to right spot
